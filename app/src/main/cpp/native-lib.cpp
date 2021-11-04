@@ -87,9 +87,21 @@ Java_com_yxm_ndktest_opencv_BankCardOcr_00024Companion_cardOcr(JNIEnv *env, jobj
                                                                jobject bitmap) {
     Mat mat;
     BitmapMatUtil::bitmap2Mat(env, mat, bitmap);
-    Rect area;
-    int result = co1::find_card_area(mat,area);
-    LOGE("识别结果：%d",result);
+    Rect card_area;
+    co1::find_card_area(mat,card_area);
+
+    Mat card_mat(mat,card_area);
+
+    //写到内存卡
+    imwrite("/storage/emulated/0/Android/data/com.yxm.ndktest/grad_n.jpg", card_mat);
+
+    Rect card_number_rect;
+    co1::find_card_number_area(card_mat,card_number_rect);
+    Mat card_number_mat(card_mat,card_number_rect);
+    imwrite("/storage/emulated/0/Android/data/com.yxm.ndktest/card_number.jpg", card_number_mat);
+
+    vector<Mat> vector;
+    co1::find_card_numbers(card_number_mat,vector);
 
     return env->NewStringUTF("123");
 }

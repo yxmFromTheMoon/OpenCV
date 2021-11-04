@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {
-                BankCardOcr.cardOcr(BitmapFactory.decodeResource(resources, R.drawable.card2))
+                BankCardOcr.cardOcr(BitmapFactory.decodeResource(resources, R.drawable.card_n))
             }
         }
 
