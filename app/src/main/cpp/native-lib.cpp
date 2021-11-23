@@ -5,6 +5,7 @@
 #include <android/log.h>
 #include "BitmapMatUtil.h"
 #include "cardocr.h"
+#include "Draw.h"
 
 using namespace cv;
 using namespace std;
@@ -66,6 +67,7 @@ Java_com_yxm_ndktest_opencv_FaceDetection_faceDetection(JNIEnv *env, jobject thi
         //保存人脸信息 mat,转成图片
         BitmapMatUtil::mat2Bitmap(env, mat, bitmap);
     }
+
     return faces.size();
 }
 
@@ -104,4 +106,17 @@ Java_com_yxm_ndktest_opencv_BankCardOcr_00024Companion_cardOcr(JNIEnv *env, jobj
     co1::find_card_numbers(card_number_mat,vector);
 
     return env->NewStringUTF("123");
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_yxm_ndktest_opencv_FaceDetection_drawLine(JNIEnv *env, jobject thiz, jobject bitmap) {
+    Mat mat;
+    BitmapMatUtil::bitmap2Mat(env, mat, bitmap);
+    Draw::drawLine(mat);
+    BitmapMatUtil::mat2Bitmap(env, mat, bitmap);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_yxm_ndktest_opencv_FaceDetection_drawText(JNIEnv *env, jobject thiz) {
+
 }

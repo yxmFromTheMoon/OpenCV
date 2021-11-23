@@ -24,4 +24,9 @@ class FaceDetection {
      * 加载人脸识别分类器
      */
     external fun loadCascade(filePath: String)
+
+
+    external fun drawLine(bitmap: Bitmap?)
+
+    external fun drawText()
 }

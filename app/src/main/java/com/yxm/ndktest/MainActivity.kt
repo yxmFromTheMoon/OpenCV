@@ -68,6 +68,9 @@ class MainActivity : AppCompatActivity() {
 
             val cardBitmap = BitmapFactory.decodeResource(resources, R.drawable.card1)
             val number = BankCardOcr.cardOcr(cardBitmap)
+            faceDetection.drawLine(mBitmap)
+            binding.originIv.setImageBitmap(mBitmap)
+
             Toast.makeText(this, number, Toast.LENGTH_SHORT).show()
         }
 
